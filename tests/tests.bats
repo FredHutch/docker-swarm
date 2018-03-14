@@ -5,7 +5,7 @@
   [[ "$v" =~ "2.2.2" ]]
 }
 
-@test "Swarmwrapper v0.4.6" {
+@test "Swarmwrapper v0.4.7" {
   v="$(swarmwrapper -V 2>&1 || true )"
-  [[ "$v" =~ "0.4.6" ]]
+  [[ "$v" =~ "0.4.7" ]]
 }

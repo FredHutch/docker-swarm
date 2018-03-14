@@ -28,7 +28,7 @@ RUN cd /usr/swarm && \
 	ln -s /usr/swarm/swarm-2.2.2-linux-x86_64 /usr/local/bin/swarm
 
 # Install Swarmwrapper v0.4.6
-RUN pip install git+https://github.com/nhoffman/swarmwrapper.git@0.4.6
+RUN pip install git+https://github.com/nhoffman/swarmwrapper.git@0.4.7
 
 # Run tests and then remove the folder
 ADD tests /usr/swarm/tests
