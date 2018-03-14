@@ -5,6 +5,10 @@
   [[ "$v" =~ "1.11.146" ]]
 }
 
+@test "FASTX Toolkit 0.0.13" {
+  v="$(fastq_quality_trimmer -h 2>&1 || true )"
+  [[ "$v" =~ "FASTX Toolkit 0.0.13" ]]
+}
 
 @test "Curl v7.47.0" {
   v="$(curl --version)"
@@ -48,5 +52,24 @@
 
   [[ "$(gunzip -c seqs1000.swarm.csv | wc -l)" == "340" ]]
   [[ "$(gunzip -c seqs1000.swarm.fasta | wc -l)" == "680" ]]
+
+}
+
+@test "run_swarm.py on FASTQ" {
+  [[ $(run_swarm.py -h) ]]
+
+  cd /usr/swarm/tests/ && \
+  ls -lhtr && \
+  run_swarm.py \
+      --input test.10k.fastq \
+      --sample-name test.10k \
+      --output-folder /usr/swarm/tests/ \
+      --temp-folder /usr/swarm/tests/
+
+  [[ -s test.10k.swarm.csv.gz ]]
+  [[ -s test.10k.swarm.fasta.gz ]]
+
+  [[ "$(gunzip -c test.10k.swarm.csv | wc -l)" == "3729" ]]
+  [[ "$(gunzip -c test.10k.swarm.fasta | wc -l)" == "7458" ]]
 
 }

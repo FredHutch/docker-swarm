@@ -28,6 +28,13 @@ RUN cd /usr/local/bin && \
 	ln -s /usr/local/bin/sratoolkit.2.8.2-ubuntu64/bin/* /usr/local/bin/ && \
 	rm sratoolkit.2.8.2-ubuntu64.tar.gz
 
+# Install the FASTX Toolkit
+RUN cd /usr/local/bin && \
+	wget -q http://hannonlab.cshl.edu/fastx_toolkit/fastx_toolkit_0.0.13_binaries_Linux_2.6_amd64.tar.bz2 && \
+	tar xf fastx_toolkit_0.0.13_binaries_Linux_2.6_amd64.tar.bz2 && \
+	rm fastx_toolkit_0.0.13_binaries_Linux_2.6_amd64.tar.bz2 && \
+	mv bin/* ./
+
 # Install Swarm
 RUN cd /usr/swarm && \
 	wget https://github.com/torognes/swarm/releases/download/v2.2.2/swarm-2.2.2-linux-x86_64 && \

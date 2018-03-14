@@ -138,6 +138,19 @@ def get_reads_from_url(
     else:
         raise Exception("Did not recognize prefix for input: " + input_str)
 
+    # If the file is gzipped, unzip it
+    if local_path.endswith(".gz"):
+        logging.info("Decompressing " + local_path)
+        run_cmds(["pigz", "-d", local_path])
+        local_path = local_path[:-3]
+
+    # If the file is a FASTQ, convert to FASTA
+    if local_path[-1] in ["q", "Q"]:
+        logging.info("Converting to FASTA")
+        fasta_fp = local_path[:-1] + "a"
+        run_cmds(["fastq_to_fasta", "-i", local_path, "-o", fasta_fp])
+        local_path = fasta_fp
+
     return local_path
 
 
