@@ -5,6 +5,10 @@
   [[ "$v" =~ "1.11.146" ]]
 }
 
+@test "pigz" {
+  [[ "$(pigz)" ]]
+}
+
 @test "FASTX Toolkit 0.0.13" {
   v="$(fastq_quality_trimmer -h 2>&1 || true )"
   [[ "$v" =~ "FASTX Toolkit 0.0.13" ]]
