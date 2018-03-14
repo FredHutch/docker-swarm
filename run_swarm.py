@@ -257,7 +257,7 @@ if __name__ == "__main__":
                         default='/share',
                         help="Folder used for temporary files.")
 
-    args = parser.parse_args(sys.argv)
+    args = parser.parse_args(sys.argv[1:])
 
     start_time = time.time()
 
