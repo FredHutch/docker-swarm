@@ -105,7 +105,10 @@ def get_reads_from_url(
     logging.info("Filename: " + filename)
     logging.info("Local path: " + local_path)
 
-    if not input_str.startswith(('s3://', 'sra://', 'ftp://')):
+    if not input_str.startswith((
+        's3://', 'sra://',
+        'ftp://', 'https://', 'http://'
+    )):
         logging.info("Treating as local path")
         msg = "Input file does not exist ({})".format(input_str)
         assert os.path.exists(input_str), msg
@@ -122,7 +125,7 @@ def get_reads_from_url(
             ])
 
     # Get files from an FTP server
-    elif input_str.startswith('ftp://'):
+    elif input_str.startswith('ftp://', 'https://', 'http://'):
         logging.info("Getting reads from FTP")
         run_cmds(['wget', '-P', temp_folder, input_str])
 
