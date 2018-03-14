@@ -34,4 +34,19 @@
 
 @test "run_swarm.py" {
   [[ $(run_swarm.py -h) ]]
+
+  cd /usr/swarm/tests/ && \
+  ls -lhtr && \
+  run_swarm.py \
+      --input seqs1000.fasta \
+      --sample-name seqs1000 \
+      --output-folder /usr/swarm/tests/ \
+      --temp-folder /usr/swarm/tests/
+
+  [[ -s seqs1000.swarm.csv.gz ]]
+  [[ -s seqs1000.swarm.fasta.gz ]]
+
+  [[ "$(gunzip -c seqs1000.swarm.csv | wc -l)" == "340" ]]
+  [[ "$(gunzip -c seqs1000.swarm.fasta | wc -l)" == "680" ]]
+
 }

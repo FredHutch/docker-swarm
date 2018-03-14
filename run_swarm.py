@@ -110,8 +110,8 @@ def get_reads_from_url(
         msg = "Input file does not exist ({})".format(input_str)
         assert os.path.exists(input_str), msg
 
-        logging.info("Making a symlink to temporary folder")
-        os.symlink(input_str, local_path)
+        logging.info("Making a copy in the temporary folder")
+        shutil.copyfile(input_str, local_path)
 
     # Get files from AWS S3
     elif input_str.startswith('s3://'):
