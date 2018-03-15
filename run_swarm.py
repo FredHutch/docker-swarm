@@ -148,7 +148,12 @@ def get_reads_from_url(
     if local_path[-1] in ["q", "Q"]:
         logging.info("Converting to FASTA")
         fasta_fp = local_path[:-1] + "a"
-        run_cmds(["fastq_to_fasta", "-i", local_path, "-o", fasta_fp])
+        run_cmds([
+            "fastq_to_fasta",
+            "-i", local_path,   # Input
+            "-o", fasta_fp,     # Output
+            "-Q", "33"          # Illumina quality encoding
+            ])
         local_path = fasta_fp
 
     return local_path
